@@ -29,4 +29,24 @@ public:
         }
         return _pre.next;
     }
+    ListNode* removeElements(ListNode* head, int val) {
+        static ListNode pre(-1);
+        pre.next = head;
+        ListNode* _cur = &pre;
+        ListNode* cur = head;
+        if (cur == NULL) return cur;
+        while(cur->next != NULL) {
+            if(cur->val == val) {
+                cur->val = cur->next->val;
+                cur->next = cur->next->next;
+            } else {
+                cur = cur->next;
+                _cur = _cur->next;
+            }
+        }
+        if(cur->val == val) {
+            _cur->next = NULL;
+        }
+        return pre.next;
+    }
 };
